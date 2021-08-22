@@ -5,6 +5,7 @@ import {
   CareerRepository,
   LevelRepository,
   RoleRepository,
+  UserDocumentRepository,
   UserRepository,
 } from "../repositories";
 
@@ -17,6 +18,7 @@ export function config(knex: Knex) {
       LevelRepository: new LevelRepository(knex),
       RoleRepository: new RoleRepository(knex),
       UserRepository: new UserRepository(knex),
+      UserDocumentRepository: new UserDocumentRepository(knex),
     };
     next();
   };

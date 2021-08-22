@@ -19,7 +19,9 @@ export interface DBUser extends Base {
   nationalityId: string;
   naturalidade: string | null;
   password: string;
+  roleId: string;
   siape: string;
+  workload: number;
 }
 
 export interface DBCareer extends Base {

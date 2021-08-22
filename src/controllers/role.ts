@@ -1,7 +1,12 @@
 import { Request, Response } from "express";
+import { ServerError } from "../helpers/apiError";
 
 export async function getRoles(req: Request, res: Response) {
-  const dbRoles = await req.db.RoleRepository.findAll();
+  try {
+    const dbRoles = await req.db.RoleRepository.findAll();
 
-  return res.status(200).send(dbRoles);
+    return res.status(200).send(dbRoles);
+  } catch (error) {
+    throw new ServerError(error);
+  }
 }

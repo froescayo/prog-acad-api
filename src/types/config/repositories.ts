@@ -1,5 +1,15 @@
-import { UserRepository } from "../../repositories";
+import {
+  AcademicDegreeRepository,
+  CareerRepository,
+  LevelRepository,
+  RoleRepository,
+  UserRepository,
+} from "../../repositories";
 
 export interface Repositories {
-  userRepository: UserRepository;
+  AcademicDegreeRepository: AcademicDegreeRepository;
+  CareerRepository: CareerRepository;
+  LevelRepository: LevelRepository;
+  RoleRepository: RoleRepository;
+  UserRepository: UserRepository;
 }

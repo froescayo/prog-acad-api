@@ -28,3 +28,9 @@ export interface DBCareer extends Base {
 export interface DBRole extends Base {
   name: string;
 }
+export interface DBLevel extends Base {
+  name: string;
+}
+export interface DBAcademicDegree extends Base {
+  name: string;
+}

@@ -1,4 +1,4 @@
-import type { DevError, ProdError } from "../types/error";
+import type { DevError, ProdError } from "../types/config/error";
 import { ApiError } from "./apiError";
 
 export function formatErrorProd(error: Error): ProdError {

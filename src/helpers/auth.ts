@@ -1,5 +1,4 @@
 import bcrypt from "bcryptjs";
-import { env } from "./env";
 
 export function hashPassword(password: string) {
   const salt = bcrypt.genSaltSync(10);

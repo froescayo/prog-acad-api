@@ -2,8 +2,8 @@ import { Router } from "express";
 import { getLevels } from "../controllers";
 import { auth } from "../middlewares/auth";
 
-const levelRoutes = Router();
+const routes = Router();
 
-levelRoutes.get("/level", auth, getLevels);
+routes.get("/level", auth, getLevels);
 
-export default levelRoutes;
+export default routes;

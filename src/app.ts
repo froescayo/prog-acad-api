@@ -4,7 +4,7 @@ import helmet from "helmet";
 import knex from "./knex";
 import { globalErrorHandler, urlNotFoundHandler } from "./middlewares/error";
 import { config } from "./middlewares/knex";
-import routes from "./routes";
+import routes from "./router";
 
 const app = express();
 

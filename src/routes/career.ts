@@ -2,8 +2,8 @@ import { Router } from "express";
 import { getCareers } from "../controllers";
 import { auth } from "../middlewares/auth";
 
-const careerRoutes = Router();
+const routes = Router();
 
-careerRoutes.get("/career", auth, getCareers);
+routes.get("/career", auth, getCareers);
 
-export default careerRoutes;
+export default routes;

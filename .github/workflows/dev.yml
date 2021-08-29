@@ -7,36 +7,30 @@ on:
   # Triggers the workflow on push or pull request events but only for the main branch
   push:
     branches: [ dev ]
+  pull_request:
+    branches: [ dev ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-
-  dev:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
     runs-on: ubuntu-latest
-      steps:
 
-        - name: checkout
-          uses: actions/checkout@master
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
 
-        - name: Login
-          uses: okteto/login@master
-          with:
-            token: ${{ secrets.OKTETO_API_TOKEN }}
+      # Runs a single command using the runners shell
+      - name: Run a one-line script
+        run: echo Hello, world!
 
-        - name: "Activate Namespace"
-          uses: okteto/namespace@master
-          with:
-            name: prog-acad-froescayo
-
-        - name: Okteto Push
-          # You may pin to the exact commit or the version.
-          # uses: okteto/push@1f8a44627f477e74dcfea26a6683073feb19de07
-          uses: okteto/push@v4.2
-          with:
-            # Create the deployment if it doesn't exist in the namespace. If not specified, the action will fail if the deployment doesn't exist
-            deploy:
-            - okteto build -t okteto.dev/prog-acad-api:latest
-            - kubectl apply -f deploy
+      - name: Okteto Login
+        uses: okteto/login@v4.2
+        with:
+          # Your okteto API token
+          token: ${{ secrets.OKTETO_API_TOKEN }}

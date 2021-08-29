@@ -42,4 +42,4 @@ jobs:
       - name: "Build"
         uses: okteto/build@master
         with:
-          tag: okteto.dev/hello-world:${{ github.sha }}
+          tag: okteto.dev/prog-acad-api:latest

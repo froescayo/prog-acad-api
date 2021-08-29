@@ -46,9 +46,9 @@ jobs:
           password: ${{ secrets.OKTETO_TOKEN }}
 
       - name: Okteto Build
-      uses: okteto/build@master
-      with:
-        tag: okteto.dev/prog-acad-api:latest
+        uses: okteto/build@master
+        with:
+          tag: okteto.dev/prog-acad-api:latest
 
   # deploy:
   #   runs-on: ubuntu-latest

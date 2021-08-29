@@ -25,7 +25,6 @@ jobs:
 
       - name: Okteto Login
       # You may pin to the exact commit or the version.
-      # uses: okteto/login@533b974fa3ad0d5fb1b39a9fd5a045c0e99a4851
       uses: okteto/login@v4.2
       with:
         # Your okteto API token

@@ -23,5 +23,6 @@
     },
     "files": [
       "src/globals.d.ts"
-    ]
+    ],
+    "include": ["**/*.ts", "**/*.js"]
   }

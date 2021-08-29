@@ -39,16 +39,16 @@ jobs:
         with:
           name: prog-acad-froescayo
 
-      - name: Okteto Docker Login
-        run: docker login registry.cloud.okteto.net
-        with:
-          username: cayofroes@hotmail.com
-          password: ${{ secrets.OKTETO_TOKEN }}
+      - name: Login
+        uses: actions-hub/docker/login@master
+          env:
+            DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+            DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Okteto Build
         uses: okteto/build@master
         with:
-          tag: okteto.dev/prog-acad-api:latest
+          tag: ${{ secrets.DOCKER_USERNAME }}/prog-acad-api:${{ github.sha }}
 
   # deploy:
   #   runs-on: ubuntu-latest

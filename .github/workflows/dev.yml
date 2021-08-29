@@ -30,7 +30,7 @@ jobs:
         run: echo Hello, world!
 
       - name: Okteto Login
-        uses: okteto/login@v4.2
+        uses: okteto/login@master
         with:
           # Your okteto API token
           token: ${{ secrets.OKTETO_TOKEN }},

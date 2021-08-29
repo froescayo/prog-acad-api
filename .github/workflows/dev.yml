@@ -1,0 +1,42 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the main branch
+  push:
+    branches: [ dev ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+
+  dev:
+    runs-on: ubuntu-latest
+      steps:
+
+        - name: checkout
+          uses: actions/checkout@master
+
+        - name: Login
+          uses: okteto/login@master
+          with:
+            token: ${{ secrets.OKTETO_API_TOKEN }}
+
+        - name: "Activate Namespace"
+          uses: okteto/namespace@master
+          with:
+            name: prog-acad-froescayo
+
+        - name: Okteto Push
+          # You may pin to the exact commit or the version.
+          # uses: okteto/push@1f8a44627f477e74dcfea26a6683073feb19de07
+          uses: okteto/push@v4.2
+          with:
+            # Create the deployment if it doesn't exist in the namespace. If not specified, the action will fail if the deployment doesn't exist
+            deploy:
+            - okteto build -t okteto.dev/prog-acad-api:latest
+            - kubectl apply -f deploy

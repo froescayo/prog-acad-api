@@ -16,25 +16,25 @@ jobs:
 
   runs-on: ubuntu-latest
     steps:
-    - name: checkout
-      uses: actions/checkout@master
+      - name: checkout
+        uses: actions/checkout@master
 
-    - name: Login
-      uses: okteto/login@master
-      with:
-        token: ${{ secrets.OKTETO_API_TOKEN }}
+      - name: Login
+        uses: okteto/login@master
+        with:
+          token: ${{ secrets.OKTETO_API_TOKEN }}
 
-    - name: "Activate Namespace"
-      uses: okteto/namespace@master
-      with:
-        name: prog-acad-froescayo
+      - name: "Activate Namespace"
+        uses: okteto/namespace@master
+        with:
+          name: prog-acad-froescayo
 
-    - name: Okteto Push
-      # You may pin to the exact commit or the version.
-      # uses: okteto/push@1f8a44627f477e74dcfea26a6683073feb19de07
-      uses: okteto/push@v4.2
-      with:
-        # Create the deployment if it doesn't exist in the namespace. If not specified, the action will fail if the deployment doesn't exist
-        deploy:
-        - okteto build -t okteto.dev/prog-acad-api:latest
-        - kubectl apply -f deploy
+      - name: Okteto Push
+        # You may pin to the exact commit or the version.
+        # uses: okteto/push@1f8a44627f477e74dcfea26a6683073feb19de07
+        uses: okteto/push@v4.2
+        with:
+          # Create the deployment if it doesn't exist in the namespace. If not specified, the action will fail if the deployment doesn't exist
+          deploy:
+          - okteto build -t okteto.dev/prog-acad-api:latest
+          - kubectl apply -f deploy

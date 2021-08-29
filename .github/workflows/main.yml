@@ -28,7 +28,7 @@ jobs:
       uses: okteto/login@v4.2
       with:
         # Your okteto API token
-        token: ${ env.OKTETO_API_TOKEN }
+        token: ${{ secrets.OKTETO_API_TOKEN }}
 
       - name: Okteto Push
       # You may pin to the exact commit or the version.

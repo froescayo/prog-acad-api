@@ -39,10 +39,7 @@ jobs:
         with:
           name: prog-acad-froescayo
 
-      - name: Okteto Push
-        uses: okteto/push@v4.2
+      - name: "Build"
+        uses: okteto/build@master
         with:
-          # Create the deployment if it doesn't exist in the namespace. If not specified, the action will fail if the deployment doesn't exist
-          deploy:
-          - okteto build -t okteto.dev/prog-acad-api:latest
-          - kubectl apply -f deploy
+          tag: okteto.dev/hello-world:${{ github.sha }}

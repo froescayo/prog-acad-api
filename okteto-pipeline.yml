@@ -1,0 +1,3 @@
+deploy:
+  - okteto build -t okteto.dev/prog-acad-api:latest
+  - kubectl apply -f deploy

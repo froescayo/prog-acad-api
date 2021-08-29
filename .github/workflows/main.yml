@@ -13,24 +13,23 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
-    runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
+  runs-on: ubuntu-latest
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
+    - name: checkout
+      uses: actions/checkout@master
 
-      - name: Okteto Login
-      # You may pin to the exact commit or the version.
-      uses: okteto/login@v4.2
+    - name: Login
+      uses: okteto/login@master
       with:
-        # Your okteto API token
         token: ${{ secrets.OKTETO_API_TOKEN }}
 
-      - name: Okteto Push
+    - name: "Activate Namespace"
+      uses: okteto/namespace@master
+      with:
+        name: prog-acad-froescayo
+
+    - name: Okteto Push
       # You may pin to the exact commit or the version.
       # uses: okteto/push@1f8a44627f477e74dcfea26a6683073feb19de07
       uses: okteto/push@v4.2

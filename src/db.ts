@@ -8,16 +8,20 @@ export interface Base {
 }
 
 export interface DBUser extends Base {
+  academicDegreeId: string;
   birthdate: Date;
   careerId: string;
   civilStatus: CivilStatus;
   email: string;
   firstName: string;
   lastName: string;
+  levelId: string;
   nationalityId: string;
   naturalidade: string | null;
   password: string;
+  roleId: string;
   siape: string;
+  workload: number;
 }
 
 export interface DBCareer extends Base {

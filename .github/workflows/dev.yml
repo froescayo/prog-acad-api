@@ -33,4 +33,8 @@ jobs:
         uses: okteto/login@v4.2
         with:
           # Your okteto API token
-          token: ${{ secrets.OKTETO_API_TOKEN }}
+          token: ${{ secrets.OKTETO_TOKEN }},
+
+      - uses: okteto/namespace@master
+        with:
+          name: prog-acad-froescayo

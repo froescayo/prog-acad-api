@@ -1,7 +1,7 @@
 FROM node:14-alpine AS build
 WORKDIR /app
 COPY package.json package-lock.json /app/
-RUN npm ci --dev
+RUN npm ci --also=dev
 COPY . /app/
 RUN npx tsc
 

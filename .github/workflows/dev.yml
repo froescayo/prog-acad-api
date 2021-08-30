@@ -50,6 +50,6 @@ jobs:
       - name: "Trigger the pipeline"
         uses: okteto/pipeline@master
         with:
-          name: pr-${{ github.event.number }}
+          name: prog-acad-api
           timeout: 8m
           skipIfExists: true

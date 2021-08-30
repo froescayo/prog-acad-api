@@ -47,9 +47,12 @@ jobs:
         with:
           tag: okteto.dev/prog-acad-api:${{ github.sha }}
 
-      - name: "Trigger the pipeline"
-        uses: okteto/pipeline@master
+      - name: "Create deployment"
+        uses: okteto/apply@master
+        with:
+          manifest: k8s/k8s.yaml
+
+      - name: "Push changes"
+        uses: okteto/push@master
         with:
           name: prog-acad-api
-          timeout: 8m
-          skipIfExists: true

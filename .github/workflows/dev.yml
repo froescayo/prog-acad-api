@@ -50,6 +50,7 @@ jobs:
       - name: "Create deployment"
         uses: okteto/apply@master
         with:
+          namespace: dev-froescayo
           manifest: k8s/k8s.yaml
 
       - name: "Push changes"

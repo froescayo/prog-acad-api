@@ -1,6 +1,8 @@
 import Knex from "knex";
 import { env } from "./env";
 
+// knex helpers functions
+
 export const instances: Knex[] = [];
 
 export async function createTable(

@@ -1,6 +1,8 @@
 import type { DevError, ProdError } from "../types/config/error";
 import { ApiError } from "./apiError";
 
+// error formatters
+
 export function formatErrorProd(error: Error): ProdError {
   if (error instanceof ApiError) {
     return {

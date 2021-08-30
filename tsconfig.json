@@ -17,5 +17,12 @@
       "alwaysStrict": true,
       "noUnusedLocals": true,
       "noUnusedParameters": true
-    }
+    },
+    "ts-node": {
+      "files": true
+    },
+    "files": [
+      "src/globals.d.ts"
+    ],
+    "include": ["src/**/*.ts", "**/*.ts", "**/*.js"]
   }

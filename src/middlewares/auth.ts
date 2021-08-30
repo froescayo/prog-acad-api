@@ -4,6 +4,8 @@ import * as jwt from "jsonwebtoken";
 import { env } from "../helpers/env";
 import { DecodedJWT } from "../types/config/jwt";
 
+// auth middleware
+
 export async function auth(req: Request, _res: Response, next: NextFunction) {
   const token = req.headers["x-access-token"] ? String(req.headers["x-access-token"]) : null;
 

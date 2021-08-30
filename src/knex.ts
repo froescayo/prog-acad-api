@@ -2,9 +2,11 @@ import { randomBytes } from "crypto";
 import Knex from "knex";
 import { env } from "./helpers/env";
 
+// databaseName definition
 export const databaseName =
   process.env.NODE_ENV && process.env.NODE_ENV === "test" ? `test_${randomBytes(8).toString("hex")}` : env.DB_DATABASE;
 
+// knex options const
 const options: Knex.Config = {
   client: "pg",
   connection: {

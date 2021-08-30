@@ -68,10 +68,10 @@ jobs:
 
       - name: Deploy and Wait
         uses: okteto/actions/deploy@v1
-          env:
-            KUBECONFIG: ${{ steps.namespace.outputs.kubeconfig }}
-          with:
-            namespace: prog-acad-froescayo
-            manifest: k8s.yml
-            tag: okteto.dev/prog-acad-api:${{ github.sha }}
-            waitOn: deployment/prog-acad-api
+        env:
+          KUBECONFIG: ${{ steps.namespace.outputs.kubeconfig }}
+        with:
+          namespace: prog-acad-froescayo
+          manifest: k8s.yml
+          tag: okteto.dev/prog-acad-api:${{ github.sha }}
+          waitOn: deployment/prog-acad-api

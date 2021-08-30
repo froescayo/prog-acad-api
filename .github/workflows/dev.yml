@@ -33,7 +33,7 @@ jobs:
 
       - uses: okteto/namespace@master
         with:
-          name: prog-acad-froescayo
+          name: dev-froescayo
 
       - name: Login
         uses: docker/login-action@v1

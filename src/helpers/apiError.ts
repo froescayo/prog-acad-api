@@ -1,3 +1,5 @@
+// error definitions
+
 export class ApiError extends Error {
   public readonly statusCode: number;
 

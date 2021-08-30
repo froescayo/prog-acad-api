@@ -1,3 +1,5 @@
+//status code definitions
+
 export enum StatusCodes {
   OKAY = 200,
   VALIDATION_FAIL = 400,

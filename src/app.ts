@@ -6,6 +6,8 @@ import { globalErrorHandler, urlNotFoundHandler } from "./middlewares/error";
 import { config } from "./middlewares/knex";
 import routes from "./router";
 
+// middleware definitions in app
+
 const app = express();
 
 app.get("/", (_, res) => {

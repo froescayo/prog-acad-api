@@ -1,6 +1,8 @@
 import { Router } from "express";
 import { authRoutes, academicDegreeRoutes, careerRoutes, levelRoutes, roleRoutes, userRoutes } from "./routes";
 
+// routes
+
 const routes = Router();
 
 routes.use(authRoutes);

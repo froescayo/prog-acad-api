@@ -1,5 +1,6 @@
 import { CivilStatus, UserDocumentType } from "./types/enums";
 
+// database interface models
 export interface Base {
   id: string;
   createdAt: Date;

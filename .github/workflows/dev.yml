@@ -47,25 +47,31 @@ jobs:
         with:
           tag: okteto.dev/prog-acad-api:${{ github.sha }}
 
-  # deploy:
-  #   runs-on: ubuntu-latest
+  deploy:
+    runs-on: ubuntu-latest
 
-  #   steps:
+    steps:
 
-  #     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-  #     - uses: actions/checkout@v2
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
 
-  #     env:
-  #       DB_DATABASE: ${{ secrets.DB_DATABASE }}
-  #       DB_HOST: ${{ secrets.DB_HOST }}
-  #       DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
-  #       DB_USERNAME: ${{ secrets.DB_USERNAME }}
-  #       JWT_SECRET: ${{ secrets.JWT_SECRET }}
+      - uses: okteto/namespace@master
+        with:
+          name: prog-acad-froescayo
 
-  #     - name: "Trigger the pipeline"
-  #       uses: okteto/pipeline@master
-  #       with:
-  #         name: pr-${{ github.event.number }}
-  #         timeout: 8m
-  #         skipIfExists: true
-  #         variables: "DB_HOST=mysql,CONFIG_PATH=/tmp/config.yaml"
+      # env:
+      #   DB_DATABASE: ${{ secrets.DB_DATABASE }}
+      #   DB_HOST: ${{ secrets.DB_HOST }}
+      #   DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+      #   DB_USERNAME: ${{ secrets.DB_USERNAME }}
+      #   JWT_SECRET: ${{ secrets.JWT_SECRET }}
+
+      - name: Deploy and Wait
+      uses: okteto/actions/deploy@v1
+        env:
+          KUBECONFIG: ${{ steps.namespace.outputs.kubeconfig }}
+        with:
+          namespace: prog-acad-froescayo
+          manifest: k8s.yml
+          tag: okteto.dev/prog-acad-api:${{ github.sha }}
+          waitOn: deployment/prog-acad-api

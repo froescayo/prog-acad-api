@@ -55,4 +55,5 @@ jobs:
       - name: "Push changes"
         uses: okteto/push@master
         with:
+          namespace: prog-acad-froescayo
           name: prog-acad-api

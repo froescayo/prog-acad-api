@@ -10,7 +10,7 @@ export interface Base {
 
 export interface DBUser extends Base {
   academicDegreeId: string;
-  birthdate: Date;
+  birthdate: Date | null;
   careerId: string;
   civilStatus: CivilStatus;
   email: string;
@@ -22,7 +22,7 @@ export interface DBUser extends Base {
   password: string;
   roleId: string;
   siape: string;
-  workload: number;
+  workload: number | null;
 }
 
 export interface DBCareer extends Base {

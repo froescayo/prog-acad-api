@@ -1,6 +1,6 @@
 import Knex from "knex";
 import { DBUser } from "../db";
-import { Repository } from "./Repository";
+import { Repository } from "./repository";
 
 export class UserRepository extends Repository<DBUser> {
   constructor(knex: Knex) {

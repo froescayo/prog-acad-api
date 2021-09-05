@@ -39,7 +39,7 @@ SMTP_TRANSPORT_URL=
 - Realizaremos a subida do banco:
  ```
  npm run postgres:start
- npm run database create
+ npm run database:create
  ```
 
 - Após isso já é possível rodarmos o projeto através do:

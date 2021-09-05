@@ -49,3 +49,7 @@ export interface DBUserDocument extends Base {
   value: string;
   userId: string;
 }
+
+export interface DBField extends Base {
+  text: string;
+}

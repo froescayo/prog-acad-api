@@ -3,6 +3,7 @@ import Knex from "knex";
 import {
   AcademicDegreeRepository,
   CareerRepository,
+  CountryRepository,
   LevelRepository,
   RoleRepository,
   UserDocumentRepository,
@@ -15,6 +16,7 @@ export function config(knex: Knex) {
     req.db = {
       AcademicDegreeRepository: new AcademicDegreeRepository(knex),
       CareerRepository: new CareerRepository(knex),
+      CountryRepository: new CountryRepository(knex),
       LevelRepository: new LevelRepository(knex),
       RoleRepository: new RoleRepository(knex),
       UserRepository: new UserRepository(knex),

@@ -19,7 +19,7 @@ export async function createUser(req: Request, res: Response) {
   const dbAcademicDegree = await req.db.AcademicDegreeRepository.get(userInput.academicDegreeId);
   const dbNationality = await req.db.CountryRepository.get(userInput.nationalityId);
 
-  if (!dbCareer || !dbRole || dbLevel || dbAcademicDegree || dbNationality) {
+  if (!dbCareer || !dbRole || !dbLevel || !dbAcademicDegree || !dbNationality) {
     throw new NotFoundError(`Some career, role, level, academicDegree or nationality was wronged informed.`);
   }
 

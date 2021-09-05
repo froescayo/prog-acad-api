@@ -8,6 +8,11 @@ export interface Base {
   deletedAt: Date | null;
 }
 
+export interface DBCountry extends Base {
+  name: string;
+  nationality: string;
+}
+
 export interface DBUser extends Base {
   academicDegreeId: string;
   birthdate: Date | null;

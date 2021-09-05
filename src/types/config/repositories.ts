@@ -1,6 +1,7 @@
 import {
   AcademicDegreeRepository,
   CareerRepository,
+  CountryRepository,
   LevelRepository,
   RoleRepository,
   UserDocumentRepository,
@@ -10,6 +11,7 @@ import {
 export interface Repositories {
   AcademicDegreeRepository: AcademicDegreeRepository;
   CareerRepository: CareerRepository;
+  CountryRepository: CountryRepository;
   LevelRepository: LevelRepository;
   RoleRepository: RoleRepository;
   UserRepository: UserRepository;

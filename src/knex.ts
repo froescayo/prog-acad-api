@@ -6,6 +6,9 @@ import { env } from "./helpers/env";
 export const databaseName =
   process.env.NODE_ENV && process.env.NODE_ENV === "test" ? `test_${randomBytes(8).toString("hex")}` : env.DB_DATABASE;
 
+export const migrationPath =
+  process.env.NODE_ENV === "production" ? "./build/src/migrations" : "src/migrations"
+
 // knex options const
 const options: Knex.Config = {
   client: "pg",
@@ -14,10 +17,11 @@ const options: Knex.Config = {
     host: env.DB_HOST,
     user: env.DB_USERNAME,
     password: env.DB_PASSWORD,
+    ssl: { rejectUnauthorized: false },
     port: parseInt(env.DB_PORT || "5432", 10),
   },
   migrations: {
-    directory: "src/migrations",
+    directory: migrationPath,
     extension: "ts",
   },
 };

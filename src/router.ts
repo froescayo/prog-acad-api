@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { authRoutes, academicDegreeRoutes, careerRoutes, levelRoutes, roleRoutes, userRoutes } from "./routes";
+import { authRoutes, academicDegreeRoutes, careerRoutes, levelRoutes, roleRoutes, userRoutes, nationalityRoutes } from "./routes";
 
 // routes
 
@@ -11,5 +11,6 @@ routes.use(careerRoutes);
 routes.use(levelRoutes);
 routes.use(roleRoutes);
 routes.use(userRoutes);
+routes.use(nationalityRoutes);
 
 export default routes;

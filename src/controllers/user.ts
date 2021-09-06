@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { NotFoundError, ValidationError } from "../helpers/apiError";
+import { NotFoundError, ServerError, ValidationError } from "../helpers/apiError";
 import { hashPassword } from "../helpers/auth";
 import { UserInput } from "../types";
 import { userValidator } from "../validators";
@@ -23,9 +23,17 @@ export async function createUser(req: Request, res: Response) {
     throw new NotFoundError(`Some career, role, level, academicDegree or nationality was wronged informed.`);
   }
 
-  const dbUser = await req.db.UserRepository.insert({ ...userInput, password: hashPassword(userInput.password) });
+  try {
+    const dbUser = await req.db.UserRepository.insert({ ...userInput, password: hashPassword(userInput.password) });
 
-  return res.status(200).send({
-    id: dbUser.id,
-  });
+    return res.status(200).send({
+      id: dbUser.id,
+    });
+  } catch(error) {
+    throw new ServerError((error as KnexError).detail)
+  }
+}
+
+interface KnexError {
+  detail: string
 }

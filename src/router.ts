@@ -1,4 +1,5 @@
 import { Router } from "express";
+
 import {
   authRoutes,
   academicDegreeRoutes,
@@ -7,6 +8,7 @@ import {
   roleRoutes,
   userRoutes,
   fieldRoutes,
+  nationalityRoutes
 } from "./routes";
 
 // routes
@@ -20,5 +22,6 @@ routes.use(fieldRoutes);
 routes.use(levelRoutes);
 routes.use(roleRoutes);
 routes.use(userRoutes);
+routes.use(nationalityRoutes);
 
 export default routes;

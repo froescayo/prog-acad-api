@@ -8,3 +8,7 @@ export interface DevError extends ProdError {
   errorObj: Error;
   stack?: string;
 }
+
+export interface KnexError {
+  detail: string;
+}

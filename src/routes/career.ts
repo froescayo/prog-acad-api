@@ -1,9 +1,8 @@
 import { Router } from "express";
 import { getCareers } from "../controllers";
-import { auth } from "../middlewares/auth";
 
 const routes = Router();
 
-routes.get("/career", auth, getCareers);
+routes.get("/career", getCareers);
 
 export default routes;

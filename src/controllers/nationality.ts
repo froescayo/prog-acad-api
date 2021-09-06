@@ -2,11 +2,11 @@ import { Request, Response } from "express";
 import { ServerError } from "../helpers/apiError";
 import { KnexError } from "../types";
 
-export async function getRoles(req: Request, res: Response) {
+export async function getNationalities(req: Request, res: Response) {
   try {
-    const dbRoles = await req.db.RoleRepository.findAll();
+    const nationalities = await req.db.CountryRepository.findAll();
 
-    return res.status(200).send(dbRoles);
+    return res.status(200).send(nationalities);
   } catch (error) {
     throw new ServerError((error as KnexError).detail);
   }

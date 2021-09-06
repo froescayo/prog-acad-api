@@ -1,7 +1,13 @@
 import { Request, Response } from "express";
+import { ServerError } from "../helpers/apiError";
+import { KnexError } from "../types";
 
 export async function getAcademicDegrees(req: Request, res: Response) {
-  const dbAcademicDegree = await req.db.AcademicDegreeRepository.findAll();
+  try {
+    const dbAcademicDegree = await req.db.AcademicDegreeRepository.findAll();
 
-  return res.status(200).send(dbAcademicDegree);
+    return res.status(200).send(dbAcademicDegree);
+  } catch (error) {
+    throw new ServerError((error as KnexError).detail);
+  }
 }

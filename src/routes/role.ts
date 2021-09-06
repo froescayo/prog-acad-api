@@ -1,9 +1,8 @@
 import { Router } from "express";
 import { getRoles } from "../controllers";
-import { auth } from "../middlewares/auth";
 
 const routes = Router();
 
-routes.get("/roles", auth, getRoles);
+routes.get("/roles", getRoles);
 
 export default routes;

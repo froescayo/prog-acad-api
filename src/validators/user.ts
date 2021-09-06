@@ -18,7 +18,7 @@ export const userValidator = Joi.object({
   firstName: stringRequiredValidator,
   lastName: stringRequiredValidator,
   levelId: uuidValidator,
-  nationalityId: uuidValidator,
+  nationalityId: stringRequiredValidator,
   naturalidade: stringValidator,
   password: stringRequiredValidator,
   roleId: uuidValidator,

@@ -6,3 +6,4 @@ export * from "./Repository";
 export * from "./RoleRepository";
 export * from "./UserDocumentRepository";
 export * from "./UserRepository";
+export * from "./FieldRepository";

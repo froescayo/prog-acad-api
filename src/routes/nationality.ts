@@ -1,8 +1,8 @@
 import { Router } from "express";
-import { getNationality } from "../controllers";
+import { getNationalities } from "../controllers";
 
 const routes = Router();
 
-routes.get("/nationality", getNationality);
+routes.get("/nationality", getNationalities);
 
 export default routes;

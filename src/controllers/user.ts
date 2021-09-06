@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
-import { NotFoundError, ServerError, ValidationError } from "../helpers/apiError";
+import { DuplicatedEntityError, NotFoundError, ServerError, ValidationError } from "../helpers/apiError";
 import { hashPassword } from "../helpers/auth";
-import { UserInput } from "../types";
+import { KnexError, UserInput } from "../types";
 import { userValidator } from "../validators";
 
 export async function createUser(req: Request, res: Response) {
@@ -13,27 +13,29 @@ export async function createUser(req: Request, res: Response) {
     throw new ValidationError(error.message);
   }
 
-  const dbCareer = await req.db.CareerRepository.get(userInput.careerId);
-  const dbRole = await req.db.RoleRepository.get(userInput.roleId);
-  const dbLevel = await req.db.LevelRepository.get(userInput.levelId);
-  const dbAcademicDegree = await req.db.AcademicDegreeRepository.get(userInput.academicDegreeId);
-  const dbNationality = await req.db.CountryRepository.get(userInput.nationalityId);
-
-  if (!dbCareer || !dbRole || !dbLevel || !dbAcademicDegree || !dbNationality) {
-    throw new NotFoundError(`Some career, role, level, academicDegree or nationality was wronged informed.`);
-  }
-
   try {
+    const dbCareer = await req.db.CareerRepository.get(userInput.careerId);
+    const dbRole = await req.db.RoleRepository.get(userInput.roleId);
+    const dbLevel = await req.db.LevelRepository.get(userInput.levelId);
+    const dbAcademicDegree = await req.db.AcademicDegreeRepository.get(userInput.academicDegreeId);
+    const dbNationality = await req.db.CountryRepository.get(userInput.nationalityId);
+
+    if (!dbCareer || !dbRole || !dbLevel || !dbAcademicDegree || !dbNationality) {
+      throw new NotFoundError(`Some career, role, level, academicDegree or nationality was wronged informed.`);
+    }
+
+    const dbUserExists = await req.db.UserRepository.findBy({ email: userInput.email });
+
+    if (dbUserExists) {
+      throw new DuplicatedEntityError("There is a registered account with this email.");
+    }
+
     const dbUser = await req.db.UserRepository.insert({ ...userInput, password: hashPassword(userInput.password) });
 
     return res.status(200).send({
       id: dbUser.id,
     });
-  } catch(error) {
-    throw new ServerError((error as KnexError).detail)
+  } catch (error) {
+    throw new ServerError((error as KnexError).detail);
   }
-}
-
-interface KnexError {
-  detail: string
 }

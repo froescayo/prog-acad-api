@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { ServerError } from "../helpers/apiError";
+import { KnexError } from "../types";
 
 export async function getRoles(req: Request, res: Response) {
   try {
@@ -7,6 +8,6 @@ export async function getRoles(req: Request, res: Response) {
 
     return res.status(200).send(dbRoles);
   } catch (error) {
-    throw new ServerError("List of roles were not found");
+    throw new ServerError((error as KnexError).detail);
   }
 }

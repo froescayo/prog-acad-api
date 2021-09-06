@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import { ValidationError } from "../helpers/apiError";
-import { FieldInput } from "../types";
+import { ServerError, ValidationError } from "../helpers/apiError";
+import { FieldInput, KnexError } from "../types";
 import { fieldValidator } from "../validators";
 
 export async function createField(req: Request, res: Response) {
@@ -12,7 +12,11 @@ export async function createField(req: Request, res: Response) {
     throw new ValidationError(error.message);
   }
 
-  const dbField = await req.db.FieldRepository.insert(fieldInput);
+  try {
+    const dbField = await req.db.FieldRepository.insert(fieldInput);
 
-  return res.status(200).send(dbField);
+    return res.status(200).send(dbField);
+  } catch (error) {
+    throw new ServerError((error as KnexError).detail);
+  }
 }

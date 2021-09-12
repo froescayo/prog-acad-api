@@ -8,9 +8,14 @@ export interface Base {
   deletedAt: Date | null;
 }
 
+export interface DBCountry extends Base {
+  name: string;
+  nationality: string;
+}
+
 export interface DBUser extends Base {
   academicDegreeId: string;
-  birthdate: Date;
+  birthdate: Date | null;
   careerId: string;
   civilStatus: CivilStatus;
   email: string;
@@ -22,7 +27,7 @@ export interface DBUser extends Base {
   password: string;
   roleId: string;
   siape: string;
-  workload: number;
+  workload: number | null;
 }
 
 export interface DBCareer extends Base {
@@ -43,4 +48,12 @@ export interface DBUserDocument extends Base {
   issuer: string;
   value: string;
   userId: string;
+}
+
+export interface DBField extends Base {
+  text: string;
+}
+export interface DBActivity extends Base {
+  text: string;
+  fieldId: string;
 }

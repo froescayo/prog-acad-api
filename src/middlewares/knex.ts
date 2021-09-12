@@ -2,7 +2,10 @@ import { NextFunction, Request, Response } from "express";
 import Knex from "knex";
 import {
   AcademicDegreeRepository,
+  ActivityRepository,
   CareerRepository,
+  CountryRepository,
+  FieldRepository,
   LevelRepository,
   RoleRepository,
   UserDocumentRepository,
@@ -14,11 +17,14 @@ export function config(knex: Knex) {
     req.knex = knex;
     req.db = {
       AcademicDegreeRepository: new AcademicDegreeRepository(knex),
+      ActivityRepository: new ActivityRepository(knex),
       CareerRepository: new CareerRepository(knex),
+      CountryRepository: new CountryRepository(knex),
+      FieldRepository: new FieldRepository(knex),
       LevelRepository: new LevelRepository(knex),
       RoleRepository: new RoleRepository(knex),
-      UserRepository: new UserRepository(knex),
       UserDocumentRepository: new UserDocumentRepository(knex),
+      UserRepository: new UserRepository(knex),
     };
     next();
   };

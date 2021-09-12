@@ -19,11 +19,11 @@ export async function login(req: Request, res: Response) {
     if (comparePassword(password, dbUser.password)) {
       const token = jwt.sign({ id: dbUser.id }, env.JWT_SECRET, { expiresIn: "1hr" });
 
-      return res.status(StatusCodes.OKAY).send(token);
+      return res.status(StatusCodes.OKAY).send({ token: token });
     }
 
     throw new LoginError("User or password does not exist.");
   } catch (error) {
-    throw new ServerError(error);
+    throw new ServerError((error as LoginError).message);
   }
 }

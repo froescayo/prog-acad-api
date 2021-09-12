@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { ServerError, ValidationError } from "../helpers/apiError";
+import { DuplicatedEntityError, ServerError, ValidationError } from "../helpers/apiError";
 import { FieldInput, KnexError } from "../types";
 import { fieldValidator } from "../validators";
 
@@ -13,9 +13,15 @@ export async function createField(req: Request, res: Response) {
   }
 
   try {
-    const dbField = await req.db.FieldRepository.insert(fieldInput);
+    const dbField = await req.db.FieldRepository.findOneBy({ text: fieldInput.text });
 
-    return res.status(200).send(dbField);
+    if (dbField) {
+      throw new DuplicatedEntityError("There is already a field with this text");
+    }
+
+    const newField = await req.db.FieldRepository.insert(fieldInput);
+
+    return res.status(200).send(newField);
   } catch (error) {
     throw new ServerError((error as KnexError).detail);
   }

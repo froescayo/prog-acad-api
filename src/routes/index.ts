@@ -1,6 +1,7 @@
 import "express-async-errors";
 
 export { default as academicDegreeRoutes } from "./academicDegree";
+export { default as activityRoutes } from "./activity";
 export { default as authRoutes } from "./auth";
 export { default as careerRoutes } from "./career";
 export { default as fieldRoutes } from "./field";

@@ -1,5 +1,6 @@
 import {
   AcademicDegreeRepository,
+  ActivityRepository,
   CareerRepository,
   CountryRepository,
   LevelRepository,
@@ -11,6 +12,7 @@ import { FieldRepository } from "../../repositories/FieldRepository";
 
 export interface Repositories {
   AcademicDegreeRepository: AcademicDegreeRepository;
+  ActivityRepository: ActivityRepository;
   CareerRepository: CareerRepository;
   CountryRepository: CountryRepository;
   FieldRepository: FieldRepository;

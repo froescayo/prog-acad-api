@@ -53,3 +53,7 @@ export interface DBUserDocument extends Base {
 export interface DBField extends Base {
   text: string;
 }
+export interface DBActivity extends Base {
+  text: string;
+  fieldId: string;
+}

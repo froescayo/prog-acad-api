@@ -1,4 +1,5 @@
 export * from "./academicDegree";
+export * from "./activity";
 export * from "./career";
 export * from "./field";
 export * from "./level";

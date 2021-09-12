@@ -8,7 +8,8 @@ import {
   roleRoutes,
   userRoutes,
   fieldRoutes,
-  nationalityRoutes
+  nationalityRoutes,
+  activityRoutes,
 } from "./routes";
 
 // routes
@@ -16,6 +17,7 @@ import {
 const routes = Router();
 
 routes.use(academicDegreeRoutes);
+routes.use(activityRoutes);
 routes.use(authRoutes);
 routes.use(careerRoutes);
 routes.use(fieldRoutes);

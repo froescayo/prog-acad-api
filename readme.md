@@ -57,14 +57,15 @@ npm run dev
 ## Routes
 ---
 
-| Route           	| Method 	| Action                                                            	| Request Body        	| Response  	|
-|-----------------	|--------	|-------------------------------------------------------------------	|---------------------	|-----------	|
-| /academicDegree 	| GET    	| Obtain all Academic Degrees from database                         	|                     	|           	|
-| /career         	| GET    	| Obtain all Careers from database                                  	|                     	|           	|
-| /level          	| GET    	| Obtain all Levels from database                                   	|                     	|           	|
-| /nationality    	| GET    	| Obtain all nationalities from database                            	|                     	|           	|
-| /roles          	| GET    	| Obtain all roles from database                                    	|                     	|           	|
-| /users          	| POST   	| Create an user                                                    	| UserInput           	| { id }    	|
-| /login          	| POST   	| Login at the application                                          	| { email, password } 	| { token } 	|
-| /field          	| POST   	| Create a Field for use at the Formulary                           	| { text }            	|           	|
-| /activity       	| POST   	| Create an Activity associated to a Field for use at the Formulary 	| { text, fieldId }   	|           	|
+| Route           	| Method 	| Action                                                            	| Request 	| Response 	|
+|-----------------	|--------	|-------------------------------------------------------------------	|---------	|----------	|
+| /academicDegree 	| GET    	| Obtain all Academic Degrees from database                         	|         	|          	|
+| /career         	| GET    	| Obtain all Careers from database                                  	|         	|          	|
+| /level          	| GET    	| Obtain all Levels from database                                   	|         	|          	|
+| /nationality    	| GET    	| Obtain all nationalities from database                            	|         	|          	|
+| /roles          	| GET    	| Obtain all roles from database                                    	|         	|          	|
+| /users          	| POST   	| Create an user                                                    	|         	|          	|
+| /login          	| POST   	| Login at the application                                          	|         	|          	|
+| /field          	| POST   	| Create a Field for use at the Formulary                           	|         	|          	|
+| /activity       	| POST   	| Create an Activity associated to a Field for use at the Formulary 	|         	|          	|
+| /fields         	| GET   	| Obtain all fields from database                                   	|         	|          	|

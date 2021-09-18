@@ -68,4 +68,4 @@ npm run dev
 | /login          	| POST   	| Login at the application                                          	|         	|          	|
 | /field          	| POST   	| Create a Field for use at the Formulary                           	|         	|          	|
 | /activity       	| POST   	| Create an Activity associated to a Field for use at the Formulary 	|         	|          	|
-| /fields       	| GET   	| Obtain all fields from database                                   	|         	|          	|
+| /fields         	| GET   	| Obtain all fields from database                                   	|         	|          	|

@@ -8,3 +8,4 @@ export const numberValidator = Joi.number();
 export const civilStatusValidator = stringRequiredValidator.valid(...Object.values(CivilStatus));
 export const dateValidator = Joi.date();
 export const emailRequiredValidator = Joi.string().email().required();
+export const integerRequiredValidator = Joi.number().integer().required();

@@ -3,12 +3,14 @@ import {
   ActivityRepository,
   CareerRepository,
   CountryRepository,
+  FieldRepository,
+  FormularyAnswerRepository,
+  FormularyRepository,
   LevelRepository,
   RoleRepository,
   UserDocumentRepository,
   UserRepository,
 } from "../../repositories";
-import { FieldRepository } from "../../repositories/FieldRepository";
 
 export interface Repositories {
   AcademicDegreeRepository: AcademicDegreeRepository;
@@ -16,6 +18,8 @@ export interface Repositories {
   CareerRepository: CareerRepository;
   CountryRepository: CountryRepository;
   FieldRepository: FieldRepository;
+  FormularyAnswerRepository: FormularyAnswerRepository;
+  FormularyRepository: FormularyRepository;
   LevelRepository: LevelRepository;
   RoleRepository: RoleRepository;
   UserDocumentRepository: UserDocumentRepository;

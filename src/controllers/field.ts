@@ -6,11 +6,11 @@ import { fieldValidator } from "../validators";
 export async function createField(req: Request, res: Response) {
   const fieldInput: FieldInput = req.body;
 
-  // const { error } = fieldValidator.validate(fieldInput);
+  const { error } = fieldValidator.validate(fieldInput);
 
-  // if (error) {
-  //   throw new ValidationError(error.message);
-  // }
+  if (error) {
+    throw new ValidationError(error.message);
+  }
 
   try {
     const dbField = await req.db.FieldRepository.findOneBy({ text: fieldInput.text });

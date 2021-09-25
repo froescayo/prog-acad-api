@@ -6,11 +6,11 @@ import { activityValidator } from "../validators";
 export async function createActivity(req: Request, res: Response) {
   const activityInput: ActivityInput = req.body;
 
-  // const { error } = activityValidator.validate(activityInput);
+  const { error } = activityValidator.validate(activityInput);
 
-  // if (error) {
-  //   throw new ValidationError(error.message);
-  // }
+  if (error) {
+    throw new ValidationError(error.message);
+  }
 
   try {
     const dbField = await req.db.FieldRepository.get(activityInput.fieldId);

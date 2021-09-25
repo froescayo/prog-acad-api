@@ -7,6 +7,7 @@
     "dev": "ts-node-dev --transpile-only -r dotenv/config -r tsconfig-paths/register -P tsconfig.json src/server.ts",
     "build": "npx tsc",
     "start": "node -r dotenv/config build/src/server.js",
+    "postinstall": "npm run build",
     "migration:create": "knex migrate:make",
     "migration:revert": "knex migrate:rollback",
     "migration:run": "knex migrate:latest",

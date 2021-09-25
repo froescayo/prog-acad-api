@@ -2,6 +2,9 @@ import { randomBytes } from "crypto";
 import Knex from "knex";
 import { env } from "./helpers/env";
 import { parse } from "pg-connection-string";
+import pg from "pg";
+
+pg.defaults.ssl = true;
 
 // databaseName definition
 export const databaseName =
@@ -18,7 +21,7 @@ const connection =
         user: env.DB_USERNAME,
         password: env.DB_PASSWORD,
         port: parseInt(env.DB_PORT || "5432", 10),
-        ssl: true,
+        ssl: { rejectUnauthorized: false },
       }
     : {
         database: dataBaseUrlParsed.database!,
@@ -26,7 +29,7 @@ const connection =
         user: dataBaseUrlParsed.user!,
         password: dataBaseUrlParsed.password!,
         port: dataBaseUrlParsed.port!,
-        ssl: true,
+        ssl: { rejectUnauthorized: false },
       };
 
 // knex options const

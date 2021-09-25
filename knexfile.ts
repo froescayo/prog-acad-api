@@ -1,6 +1,3 @@
-import pg from "pg";
-pg.defaults.ssl = true;
-
 module.exports = {
   development: {
     client: "postgresql",

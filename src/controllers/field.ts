@@ -1,4 +1,4 @@
-import { request, Request, Response } from "express";
+import { Request, Response } from "express";
 import { DuplicatedEntityError, ServerError, ValidationError } from "../helpers/apiError";
 import { FieldInput, KnexError } from "../types";
 import { fieldValidator } from "../validators";

@@ -8,7 +8,7 @@ module.exports = {
     },
     migrations: {
       directory: "src/migrations",
-      extension: "js",
+      extension: "ts",
     },
   },
 };

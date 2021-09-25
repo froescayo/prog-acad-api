@@ -38,7 +38,7 @@ const options: Knex.Config = {
   connection,
   migrations: {
     directory: "src/migrations",
-    extension: "ts",
+    extension: process.env.NODE_ENV !== "production" ? "ts" : "js",
   },
 };
 const knex: Knex = Knex(options);

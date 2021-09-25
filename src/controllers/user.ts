@@ -7,11 +7,11 @@ import { userValidator } from "../validators";
 export async function createUser(req: Request, res: Response) {
   const userInput: UserInput = req.body;
 
-  const { error } = userValidator.validate(userInput);
+  // const { error } = userValidator.validate(userInput);
 
-  if (error) {
-    throw new ValidationError(error.message);
-  }
+  // if (error) {
+  //   throw new ValidationError(error.message);
+  // }
 
   try {
     const dbCareer = await req.db.CareerRepository.get(userInput.careerId);

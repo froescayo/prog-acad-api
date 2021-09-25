@@ -15,7 +15,6 @@ const options: Knex.Config = {
     user: env.DB_USERNAME,
     password: env.DB_PASSWORD,
     port: parseInt(env.DB_PORT || "5432", 10),
-    ssl: true,
   },
   migrations: {
     directory: "src/migrations",

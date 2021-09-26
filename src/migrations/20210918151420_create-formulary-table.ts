@@ -6,6 +6,8 @@ export async function up(knex: Knex) {
     table.uuid("userId").notNullable();
     table.string("type").notNullable();
     table.jsonb("comission").notNullable();
+    table.date("from").notNullable();
+    table.date("to").notNullable();
   });
 }
 

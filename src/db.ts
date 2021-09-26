@@ -64,6 +64,8 @@ export interface DBFormulary extends Base {
   userId: string;
   type: FormularyType;
   comission: Comission[];
+  from: Date;
+  to: Date;
 }
 
 export interface DBFormularyAnswer extends Base {

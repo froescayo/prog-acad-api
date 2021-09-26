@@ -1,15 +1,16 @@
 import { Router } from "express";
 
 import {
-  authRoutes,
   academicDegreeRoutes,
+  activityRoutes,
+  authRoutes,
   careerRoutes,
+  fieldRoutes,
+  formularyRoutes,
   levelRoutes,
+  nationalityRoutes,
   roleRoutes,
   userRoutes,
-  fieldRoutes,
-  nationalityRoutes,
-  activityRoutes,
 } from "./routes";
 
 // routes
@@ -21,9 +22,10 @@ routes.use(activityRoutes);
 routes.use(authRoutes);
 routes.use(careerRoutes);
 routes.use(fieldRoutes);
+routes.use(formularyRoutes);
 routes.use(levelRoutes);
+routes.use(nationalityRoutes);
 routes.use(roleRoutes);
 routes.use(userRoutes);
-routes.use(nationalityRoutes);
 
 export default routes;

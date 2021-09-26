@@ -1,3 +1,1 @@
-build:
-  docker:
-    prog-acad-api: Dockerfile;
+build: docker: web: Dockerfile;

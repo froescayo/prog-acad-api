@@ -1,4 +1,5 @@
-import { CivilStatus, UserDocumentType } from "./types/enums";
+import { Comission, FormularyAnswer } from "./types";
+import { CivilStatus, FormularyType, UserDocumentType } from "./types/enums";
 
 // database interface models
 export interface Base {
@@ -56,4 +57,20 @@ export interface DBField extends Base {
 export interface DBActivity extends Base {
   text: string;
   fieldId: string;
+  points: number;
+}
+
+export interface DBFormulary extends Base {
+  userId: string;
+  type: FormularyType;
+  comission: Comission[];
+  from: Date;
+  to: Date;
+}
+
+export interface DBFormularyAnswer extends Base {
+  formularyId: string;
+  fieldId: string;
+  activityId: string;
+  answer: FormularyAnswer[];
 }

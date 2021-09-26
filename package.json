@@ -2,11 +2,12 @@
   "name": "prog-acad-api",
   "version": "1.0.0",
   "description": "",
-  "main": "server.ts",
+  "main": "build/src/server.js",
   "scripts": {
     "dev": "ts-node-dev --transpile-only -r dotenv/config -r tsconfig-paths/register -P tsconfig.json src/server.ts",
-    "build": "npx tsc && cp -R ./build/src/",
-    "start": "node -r dotenv/config build/server.js",
+    "build": "npx tsc",
+    "start": "node build/src/server.js",
+    "postinstall": "npm run build",
     "migration:create": "knex migrate:make",
     "migration:revert": "knex migrate:rollback",
     "migration:run": "knex migrate:latest",
@@ -59,6 +60,7 @@
     "jsonwebtoken": "^8.5.1",
     "knex": "^0.21.21",
     "pg": "^8.7.1",
+    "pg-connection-string": "^2.5.0",
     "supertest": "^6.1.5",
     "uuid": "^8.3.2"
   }

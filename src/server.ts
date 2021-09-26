@@ -1,10 +1,8 @@
 import app from "./app";
 import knex from "./knex";
-import { Server } from "http";
 
-const PORT = process.env.PORT ?? 9999;
-
-let server: Server;
+const HOST = "0.0.0.0";
+const PORT = process.env.PORT || 8000;
 
 // server initiation
 
@@ -12,9 +10,9 @@ async function startServer() {
   // always run latest migrations
   await knex.migrate.latest();
 
-  server = app.listen(PORT, () => console.log(`Running on http://localhost:${PORT}`));
+  app.listen(Number(PORT), HOST, () => console.log(`Serving on: ${PORT}`));
 
-  return server;
+  return app;
 }
 
 startServer().finally();

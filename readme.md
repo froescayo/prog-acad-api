@@ -51,8 +51,9 @@ npm run dev
 ## Sobre
 
 ---
+### Database Diagram
 
-[...] WIP
+![Database Diagram](./docs/database.png)
 
 ## Routes
 ---

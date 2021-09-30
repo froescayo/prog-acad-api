@@ -70,6 +70,7 @@ npm run dev
 | /field          	| POST   	| Create a Field for use at the Formulary                           	|
 | /activity       	| POST   	| Create an Activity associated to a Field for use at the Formulary 	|
 | /fields         	| GET   	| Obtain all fields from database                                   	|
+| /field/:id/activities 	| GET   	| Obtain all activities from a field from database                                   	|
 | /formulary       	| POST   	| Create a Formulary at Database                                    	|
 
 
@@ -164,12 +165,33 @@ Response Body:
 
 ```js
 [
-  {
-    "id": "e362357f-f9f6-4e62-a905-7d2b721fc13b",
-    "createdAt": "2021-08-22T20:58:06.441Z",
-    "updatedAt": "2021-08-22T20:58:06.441Z",
+   {
+    "id": "5c0901b4-4292-40bc-91dd-ce8047cae7e3",
+    "createdAt": "2021-09-30T00:36:50.981Z",
+    "updatedAt": "2021-09-30T00:36:50.981Z",
     "deletedAt": null,
-    "name": "Professor Auxiliar"
+    "campo": "CAMPO I – ATIVIDADES DE ENSINO, ORIENTAÇÃO E PARTICIPAÇÃO EM BANCAS EXAMINADORAS",
+    "observacao": "OBS.: Não será considerada a acumulação de pontuação de orientação e de membro de Banca Examinadora/Coordenação para fins de progressão/promoção"
+  }
+]
+```
+
+**/field/:id/activities - GET**
+
+Response Body:
+
+```js
+[
+   {
+    "id": "080b2da7-380b-4c5b-bb24-18c8e0e30193",
+    "createdAt": "2021-09-30T00:36:50.981Z",
+    "updatedAt": "2021-09-30T00:36:50.981Z",
+    "deletedAt": null,
+    "atividade": "1.1  Ministrante de aulas em curso de graduação e em curso de pós-graduação stricto sensu (presenciais e EAD)",
+    "fieldId": "5c0901b4-4292-40bc-91dd-ce8047cae7e3",
+    "pontos": 1,
+    "label": "01/15h de aula",
+    "peso": 15
   }
 ]
 ```

@@ -13,7 +13,7 @@ export async function createField(req: Request, res: Response) {
   }
 
   try {
-    const dbField = await req.db.FieldRepository.findOneBy({ text: fieldInput.text });
+    const dbField = await req.db.FieldRepository.findOneBy({ campo: fieldInput.campo });
 
     if (dbField) {
       throw new DuplicatedEntityError("There is already a field with this text");

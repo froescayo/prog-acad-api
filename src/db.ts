@@ -52,12 +52,15 @@ export interface DBUserDocument extends Base {
 }
 
 export interface DBField extends Base {
-  text: string;
+  campo: string;
+  observacao: string | null;
 }
 export interface DBActivity extends Base {
-  text: string;
+  atividade: string;
   fieldId: string;
-  points: number;
+  pontos: number;
+  peso: number;
+  label: string;
 }
 
 export interface DBFormulary extends Base {

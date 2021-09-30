@@ -1,6 +1,9 @@
 import Joi from "joi";
 
 export const activityValidator = Joi.object({
-  text: Joi.string().required(),
+  atividade: Joi.string().required(),
   fieldId: Joi.string().required(),
+  pontos: Joi.number().required(),
+  peso: Joi.number().required(),
+  label: Joi.string().required(),
 });

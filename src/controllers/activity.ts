@@ -20,7 +20,7 @@ export async function createActivity(req: Request, res: Response) {
     }
 
     const dbActivity = await req.db.ActivityRepository.findOneBy({
-      text: activityInput.text,
+      atividade: activityInput.atividade,
       fieldId: activityInput.fieldId,
     });
 
@@ -31,6 +31,24 @@ export async function createActivity(req: Request, res: Response) {
     const newActivity = await req.db.ActivityRepository.insert(activityInput);
 
     return res.status(200).send(newActivity);
+  } catch (error) {
+    throw new ServerError((error as KnexError).detail);
+  }
+}
+
+export async function getActivitiesFromField(req: Request, res: Response) {
+  const { id: fieldId } = req.params;
+
+  try {
+    const dbField = await req.db.FieldRepository.get(fieldId);
+
+    if (!dbField) {
+      throw new NotFoundError("It was not possible to find the required field");
+    }
+
+    const dbActivities = await req.db.ActivityRepository.findBy({ fieldId });
+
+    return res.status(200).send(dbActivities);
   } catch (error) {
     throw new ServerError((error as KnexError).detail);
   }

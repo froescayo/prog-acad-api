@@ -13,8 +13,8 @@ export async function createFormulary(req: Request, res: Response) {
   }
 
   try {
-    const result = req.knex.transaction(async trx => {
-      const answers = [];
+    const result = await req.knex.transaction(async trx => {
+      const respostas = [];
 
       const dbFormulary = await req.db.FormularyRepository.insert(
         {
@@ -29,7 +29,7 @@ export async function createFormulary(req: Request, res: Response) {
 
       for (const item of formularyInput.answers) {
         const dbField = await req.db.FieldRepository.findOneBy({ id: item.fieldId }, trx);
-        const dbActivity = await req.db.ActivityRepository.findOneBy({ id: item.activityId }, trx);
+        const dbActivity = await req.db.ActivityRepository.findOneBy({ id: item.activityId, fieldId: item.fieldId }, trx);
 
         if (!dbField || !dbActivity) {
           throw new NotFoundError("We weren't able to find some field or activity.");
@@ -45,10 +45,10 @@ export async function createFormulary(req: Request, res: Response) {
           trx,
         );
 
-        answers.push(dbFormularyAnswer);
+        respostas.push(dbFormularyAnswer);
       }
 
-      return { formulary: dbFormulary, answers };
+      return { formulary: dbFormulary, respostas };
     });
 
     return res.status(200).send(result);

@@ -1,4 +1,3 @@
-import { Comission, FormularyAnswer } from "./types";
 import { CivilStatus, FormularyType, UserDocumentType } from "./types/enums";
 
 // database interface models

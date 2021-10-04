@@ -66,7 +66,7 @@ export interface DBActivity extends Base {
 export interface DBFormulary extends Base {
   userId: string;
   type: FormularyType;
-  comission: Comission[];
+  comission: string;
   from: Date;
   to: Date;
 }
@@ -75,5 +75,5 @@ export interface DBFormularyAnswer extends Base {
   formularyId: string;
   fieldId: string;
   activityId: string;
-  answer: FormularyAnswer[];
+  answer: string;
 }

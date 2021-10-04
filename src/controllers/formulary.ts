@@ -22,7 +22,7 @@ export async function createFormulary(req: Request, res: Response) {
           from: formularyInput.period.from,
           to: formularyInput.period.to,
           userId: req.decodedJTW.id,
-          comission: formularyInput.comission,
+          comission: JSON.stringify(formularyInput.comission),
         },
         trx,
       );
@@ -40,7 +40,7 @@ export async function createFormulary(req: Request, res: Response) {
             formularyId: dbFormulary.id,
             fieldId: item.fieldId,
             activityId: item.activityId,
-            answer: item.answer,
+            answer: JSON.stringify(item.answer),
           },
           trx,
         );

@@ -24,7 +24,7 @@ export async function createUser(req: Request, res: Response) {
       throw new NotFoundError(`Some career, role, level, academicDegree or nationality was wronged informed.`);
     }
 
-    const dbUserExists = await req.db.UserRepository.findBy({ email: userInput.email });
+    const dbUserExists = await req.db.UserRepository.findOneBy({ email: userInput.email });
 
     if (dbUserExists) {
       throw new DuplicatedEntityError("There is a registered account with this email.");

@@ -32,6 +32,7 @@ export async function createActivity(req: Request, res: Response) {
 
     return res.status(200).send(newActivity);
   } catch (error) {
+    console.log("Error on Creating Activity: ", error);
     throw new ServerError((error as KnexError).detail);
   }
 }
@@ -50,6 +51,7 @@ export async function getActivitiesFromField(req: Request, res: Response) {
 
     return res.status(200).send(dbActivities);
   } catch (error) {
+    console.log("Error on Getting Activities: ", error);
     throw new ServerError((error as KnexError).detail);
   }
 }

@@ -8,6 +8,7 @@ export async function getNationalities(req: Request, res: Response) {
 
     return res.status(200).send(nationalities);
   } catch (error) {
+    console.log("Error on Getting Nationalities: ", error);
     throw new ServerError((error as KnexError).detail);
   }
 }

@@ -8,6 +8,7 @@ export async function getLevels(req: Request, res: Response) {
 
     return res.status(200).send(dbLevels);
   } catch (error) {
+    console.log("Error on Getting Levels: ", error);
     throw new ServerError((error as KnexError).detail);
   }
 }

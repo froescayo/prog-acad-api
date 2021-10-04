@@ -3,7 +3,7 @@ import { CivilStatus } from "../types";
 
 export const userValidator = Joi.object({
   academicDegreeId: Joi.string().required(),
-  birthdate: Joi.date(),
+  birthdate: Joi.date().allow(null),
   careerId: Joi.string().required(),
   civilStatus: Joi.string()
     .valid(...Object.values(CivilStatus))
@@ -13,9 +13,9 @@ export const userValidator = Joi.object({
   lastName: Joi.string().required(),
   levelId: Joi.string().required(),
   nationalityId: Joi.string().required(),
-  naturalidade: Joi.string(),
+  naturalidade: Joi.string().allow(null),
   password: Joi.string().required(),
   roleId: Joi.string().required(),
   siape: Joi.string().required(),
-  workload: Joi.number(),
+  workload: Joi.number().allow(null),
 });

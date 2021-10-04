@@ -8,6 +8,7 @@ export async function getAcademicDegrees(req: Request, res: Response) {
 
     return res.status(200).send(dbAcademicDegree);
   } catch (error) {
+    console.log("Error on Getting Academic Degrees: ", error);
     throw new ServerError((error as KnexError).detail);
   }
 }

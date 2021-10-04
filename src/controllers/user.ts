@@ -36,6 +36,7 @@ export async function createUser(req: Request, res: Response) {
       id: dbUser.id,
     });
   } catch (error) {
+    console.log("Error on Creating User: ", error);
     throw new ServerError((error as KnexError).detail);
   }
 }

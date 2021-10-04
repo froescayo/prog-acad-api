@@ -23,6 +23,7 @@ export async function createField(req: Request, res: Response) {
 
     return res.status(200).send(newField);
   } catch (error) {
+    console.log("Error on Creating Fields: ", error);
     throw new ServerError((error as KnexError).detail);
   }
 }
@@ -33,6 +34,7 @@ export async function getFields(req: Request, res: Response) {
 
     return res.status(200).send(dbFields);
   } catch (error) {
+    console.log("Error on Getting Fields: ", error);
     throw new ServerError((error as KnexError).detail);
   }
 }

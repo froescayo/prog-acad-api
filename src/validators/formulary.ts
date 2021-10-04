@@ -9,8 +9,8 @@ export const formularyValidator = Joi.object({
   }),
   comission: Joi.array().items({
     professorName: Joi.string().required(),
-    department: Joi.string(),
-    institute: Joi.string(),
+    department: Joi.string().allow(null),
+    institute: Joi.string().allow(null),
   }),
   answers: Joi.array().items({
     fieldId: Joi.string().required(),

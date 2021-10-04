@@ -8,6 +8,7 @@ export async function getCareers(req: Request, res: Response) {
 
     return res.status(200).send(dbCareer);
   } catch (error) {
+    console.log("Error on Getting Careers: ", error);
     throw new ServerError((error as KnexError).detail);
   }
 }

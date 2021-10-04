@@ -24,6 +24,7 @@ export async function login(req: Request, res: Response) {
 
     throw new LoginError("User or password does not exist.");
   } catch (error) {
+    console.log("Error on Login: ", error);
     throw new ServerError((error as LoginError).message);
   }
 }

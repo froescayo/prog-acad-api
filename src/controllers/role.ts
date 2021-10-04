@@ -8,6 +8,7 @@ export async function getRoles(req: Request, res: Response) {
 
     return res.status(200).send(dbRoles);
   } catch (error) {
+    console.log("Error on Getting Roles: ", error);
     throw new ServerError((error as KnexError).detail);
   }
 }

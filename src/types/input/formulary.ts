@@ -7,9 +7,12 @@ export interface FormularyInput {
     to: Date;
   };
   comission: Comission[];
-  answers: Array<{
-    fieldId: string;
-    activityId: string;
-    answer: FormularyAnswer[];
-  }>;
+}
+
+export interface FormularyAnswerInput {
+  id: string | null;
+  formularyId: string;
+  fieldId: string;
+  activityId: string;
+  answers: FormularyAnswer[];
 }

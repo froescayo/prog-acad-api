@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
-import { NotFoundError, ServerError, ValidationError } from "../helpers/apiError";
-import { FormularyInput, KnexError } from "../types";
-import { formularyValidator } from "../validators";
+import { InvalidActionError, NotFoundError, ServerError, ValidationError } from "../helpers/apiError";
+import { FormularyAnswerInput, FormularyInput, FormularyStatus, KnexError } from "../types";
+import { formularyAnswersValidator, formularyValidator } from "../validators";
 
 export async function createFormulary(req: Request, res: Response) {
   const formularyInput: FormularyInput = req.body;
@@ -13,47 +13,123 @@ export async function createFormulary(req: Request, res: Response) {
   }
 
   try {
-    const result = await req.knex.transaction(async trx => {
-      const respostas = [];
-
       const dbFormulary = await req.db.FormularyRepository.insert(
         {
           type: formularyInput.type,
           from: formularyInput.period.from,
           to: formularyInput.period.to,
           userId: req.decodedJTW.id,
+          status: FormularyStatus.ON_PROGRESS,
           comission: JSON.stringify(formularyInput.comission),
-        },
-        trx,
+        }
       );
 
-      for (const item of formularyInput.answers) {
-        const dbField = await req.db.FieldRepository.findOneBy({ id: item.fieldId }, trx);
-        const dbActivity = await req.db.ActivityRepository.findOneBy({ id: item.activityId, fieldId: item.fieldId }, trx);
-
-        if (!dbField || !dbActivity) {
-          throw new NotFoundError("We weren't able to find some field or activity.");
-        }
-
-        const dbFormularyAnswer = await req.db.FormularyAnswerRepository.insert(
-          {
-            formularyId: dbFormulary.id,
-            fieldId: item.fieldId,
-            activityId: item.activityId,
-            answer: JSON.stringify(item.answer),
-          },
-          trx,
-        );
-
-        respostas.push(dbFormularyAnswer);
-      }
-
-      return { formulary: dbFormulary, respostas };
-    });
-
-    return res.status(200).send(result);
+    return res.status(200).send(dbFormulary);
   } catch (error) {
     console.log("Error on Creating Formulary: ", error);
+    throw new ServerError((error as KnexError).detail);
+  }
+}
+
+export async function upsertFormularyAnswer(req: Request, res: Response) {
+  const formularyAnswerInput: FormularyAnswerInput = req.body;
+
+  const { error } = formularyAnswersValidator.validate(formularyAnswerInput);
+
+  if (error) {
+    throw new ValidationError(error.message);
+  }
+
+  const dbFormulary = await req.db.FormularyRepository.get(formularyAnswerInput.formularyId);
+
+  if (!dbFormulary) {
+    throw new NotFoundError("There is no formulary under the informed id.");
+  }
+
+  if (dbFormulary.status !== FormularyStatus.ON_PROGRESS) {
+    throw new InvalidActionError("It is not possible to edit a closed formulary. Please, create another one.");
+  }
+
+  if (dbFormulary.userId !== req.decodedJTW.id) {
+    throw new InvalidActionError("You're not authorized to update this formulary.");
+  }
+
+  const dbFormularyAnswers = await req.db.FormularyAnswerRepository.upsertFormularyAnswers(req, formularyAnswerInput);
+
+  return res.status(200).send(dbFormularyAnswers);
+
+}
+
+export async function getFormulariesByUser(req: Request, res: Response) {
+  try {
+    const dbFormularies = await req.db.FormularyRepository.findBy({ userId: req.decodedJTW.id });
+
+    return res.status(200).send(dbFormularies);
+  } catch (error) {
+    console.log("Error on Getting Formulary By User: ", error);
+    throw new ServerError((error as KnexError).detail);
+  }
+}
+
+export async function getFormularyInformations(req: Request, res: Response) {
+  const { id: formularyId } = req.params;
+
+  try {
+    const dbFormulary = await req.db.FormularyRepository.get(formularyId);
+
+    if (!dbFormulary) {
+      throw new NotFoundError("We couldn't find this formulary.")
+    }
+
+    const dbFormularyAnswers = await req
+      .knex("formularyAnswers")
+      .select(
+        "formularyAnswers.id",
+        "formularyAnswers.answer",
+        "formularyAnswers.activityId",
+        "formularyAnswers.fieldId",
+        "activities.atividade",
+        "fields.campo",
+      )
+      .leftJoin("activities", "formularyAnswers.activityId", "activities.id")
+      .leftJoin("fields", "formularyAnswers.fieldId", "fields.id")
+      .groupBy("formularyAnswers.id", "fields.campo", "activities.atividade")
+      .where("formularyAnswers.formularyId", dbFormulary.id)
+      .orderBy("fields.campo")
+      .orderBy("activities.atividade");
+
+    return res.status(200).send({
+      dbFormulary,
+      dbFormularyAnswers,
+    });
+  } catch (error) {
+    console.log("Error on Getting Formulary: ", error);
+    throw new ServerError((error as KnexError).detail);
+  }
+}
+
+export async function closeFormulary(req: Request, res: Response) {
+  const { id: formularyId } = req.params;
+
+  try {
+    const dbFormulary = await req.db.FormularyRepository.get(formularyId);
+
+    if (!dbFormulary) {
+      throw new NotFoundError("We couldn't find this formulary.")
+    }
+
+    if (dbFormulary.userId !== req.decodedJTW.id) {
+      throw new InvalidActionError("You're not authorized to close this formulary.");
+    }
+
+    const finishedFormulary = await req.db.FormularyRepository.update({
+      id: formularyId,
+      status: FormularyStatus.DONE,
+    });
+
+    return res.status(200).send(finishedFormulary);
+  } catch (error) {
+    console.log("Error on Closing Formulary: ", error);
     throw new ServerError((error as KnexError).detail);
   }
 }

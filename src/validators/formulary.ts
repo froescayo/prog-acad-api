@@ -11,13 +11,16 @@ export const formularyValidator = Joi.object({
     professorName: Joi.string().required(),
     department: Joi.string().allow(null),
     institute: Joi.string().allow(null),
-  }),
+  })
+});
+
+export const formularyAnswersValidator = Joi.object({
+  id: Joi.string().allow(null),
+  formularyId: Joi.string().required(),
+  fieldId: Joi.string().required(),
+  activityId: Joi.string().required(),
   answers: Joi.array().items({
-    fieldId: Joi.string().required(),
-    activityId: Joi.string().required(),
-    answer: Joi.array().items({
-      semester: Joi.string().required(),
-      points: Joi.number().required(),
-    }),
+    semester: Joi.string().required(),
+    quantity: Joi.number().required(),
   }),
 });

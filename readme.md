@@ -72,6 +72,9 @@ npm run dev
 | /fields         	| GET   	| Obtain all fields from database                                   	|
 | /field/:id/activities 	| GET   	| Obtain all activities from a field from database                                   	|
 | /formulary       	| POST   	| Create a Formulary at Database                                    	|
+| /formularyAnswer       	| PUT   	| Create or Update a Formulary Answer at Database                                    	|
+| /formularies       	| GET   	| Obtain all formularies from logged user                                    	|
+| /formulary/:id/close       	| POST   	| Finish and closes a formulary                                    	|
 
 
 ## Detailed Instructions
@@ -242,7 +245,10 @@ Response Body:
 
 ```js
 {
-  token: token // token de login -> deve ser passado no header como x-access-token para toda requisição que necessite de autenticação
+  "token": "token", // token de login -> deve ser passado no header como x-access-token para toda requisição que necessite de autenticação
+  "siape": "siape",
+  "firstName": "The",
+  "lastName": "Doctor"
 }
 ```
 
@@ -252,23 +258,195 @@ Request Body:
 
 ```js
 {
-  type: "Progressao" || "Promocao", // tipo do formulario
-  period: { // periodo do formulario
-    from: Date,
-    to: Date,
-  },
-  comission: [{
-    professorName: string, // nome do professor na comissao
-    department: string, // noem do departamento
-    institute: string, // nome do instituto
-  }],
-  answers: [{
-    fieldId: field.id, // id do campo referente
-    activityId: activity.id, // id da atividade contida no campo
-    answer: [{
-        semester: string, // semestre equivalente aquela nota, EX: 2020.1
-        points: number, // pontos para aquele semestre, EX: 2
-    }],
-  }];
+	"type": "Promocao" || "Progressao",
+	"period": {
+		"from": "01/01/2016",
+		"to": "01/01/2018"
+	},
+	"comission": [
+		{
+			"professorName": "Professor Um",
+			"department": "Departamento Um",
+			"institute": "Instituto Um"
+		}
+	]
 }
+```
+
+Response Body:
+
+```js
+{
+  "id": "1123a1ca-58f3-405f-afed-156e2f1f50ea",
+  "createdAt": "2021-10-10T20:27:18.677Z",
+  "updatedAt": "2021-10-10T20:27:18.677Z",
+  "deletedAt": null,
+  "userId": "73e66ed7-80b4-43df-9e51-84655802168c",
+  "type": "Promocao",
+  "comission": [
+    {
+      "institute": "Instituto Um",
+      "department": "Departamento Um",
+      "professorName": "Professor Um"
+    }
+  ],
+  "from": "2016-01-01T03:00:00.000Z",
+  "to": "2018-01-01T03:00:00.000Z",
+  "status": "Em andamento" // não é permitido a edição das respostas de um formulario que esteja com status em Concluido
+}
+```
+
+**/formularyAnswer - PUT**
+
+Request Body:
+
+```js
+{
+	"id": null || "ID Referente a resposta a ser atualizada",
+	"formularyId": "1123a1ca-58f3-405f-afed-156e2f1f50ea",
+  "fieldId": "ed7dc5c6-5bc7-4702-a0e0-19fdc050c043",
+  "activityId": "aaeaec14-c422-4e12-beb6-2379d6cccc9a",
+  "answers": [
+		{
+			"semester": "2018.1",
+			"quantity": 2
+		},
+		{
+			"semester": "2018.2",
+			"quantity": 20
+		}
+	]
+}
+```
+
+Response Body:
+
+```js
+{
+  "id": "225fc80e-7de3-4726-9fbb-ab65546677ef",
+  "createdAt": "2021-10-10T20:48:46.116Z",
+  "updatedAt": "2021-10-10T20:48:46.116Z",
+  "deletedAt": null,
+  "formularyId": "1123a1ca-58f3-405f-afed-156e2f1f50ea",
+  "fieldId": "ed7dc5c6-5bc7-4702-a0e0-19fdc050c043",
+  "activityId": "aaeaec14-c422-4e12-beb6-2379d6cccc9a",
+  "answer": [
+    {
+      "quantity": 2,
+      "semester": "2018.1"
+    },
+    {
+      "quantity": 20,
+      "semester": "2018.2"
+    }
+  ]
+}
+```
+
+**/formulary/:id - GET**
+
+Response Body
+
+```js
+{
+  "dbFormulary": {
+    "id": "1123a1ca-58f3-405f-afed-156e2f1f50ea",
+    "createdAt": "2021-10-10T20:27:18.677Z",
+    "updatedAt": "2021-10-10T21:06:25.532Z",
+    "deletedAt": null,
+    "userId": "73e66ed7-80b4-43df-9e51-84655802168c",
+    "type": "Promocao",
+    "comission": [
+      {
+        "institute": "Instituto Um",
+        "department": "Departamento Um",
+        "professorName": "Professor Um"
+      }
+    ],
+    "from": "2016-01-01T03:00:00.000Z",
+    "to": "2018-01-01T03:00:00.000Z",
+    "status": "Concluido"
+  },
+  "dbFormularyAnswers": [
+    {
+      "id": "91e5777b-076e-49d7-8d8c-03a7be510337",
+      "answer": [
+        {
+          "quantity": 1,
+          "semester": "2017.1"
+        },
+        {
+          "quantity": 10,
+          "semester": "2017.2"
+        }
+      ],
+      "activityId": "5e594f07-db03-440c-95c5-f9b437a27f56",
+      "fieldId": "e4b36cb3-8fa8-4966-abfa-5bc4fc7ac534",
+      "atividade": "2.7 Ministrante de cursos (CH <8 h) em eventos acadêmicos",
+      "campo": "CAMPO II - ATIVIDADES DE PESQUISA, PRODUÇÃO ACADÊMICA, CRIAÇÃO E INOVAÇÃO"
+    },
+    {
+      "id": "225fc80e-7de3-4726-9fbb-ab65546677ef",
+      "answer": [
+        {
+          "quantity": 2,
+          "semester": "2018.1"
+        },
+        {
+          "quantity": 20,
+          "semester": "2018.2"
+        }
+      ],
+      "activityId": "aaeaec14-c422-4e12-beb6-2379d6cccc9a",
+      "fieldId": "ed7dc5c6-5bc7-4702-a0e0-19fdc050c043",
+      "atividade": "8.6 Projeto gráfico de livros (design)",
+      "campo": "CAMPO VIII - ATIVIDADES PROFISSIONAIS"
+    }
+  ]
+}
+```
+
+**/formularies - GET**
+
+Response Body
+
+```js
+[
+  {
+    "id": "ff18b56d-c29e-43a1-ab4e-6a289e92caa3",
+    "createdAt": "2021-10-04T12:05:12.133Z",
+    "updatedAt": "2021-10-04T12:05:12.133Z",
+    "deletedAt": null,
+    "userId": "73e66ed7-80b4-43df-9e51-84655802168c",
+    "type": "Promocao",
+    "comission": [
+      {
+        "institute": "Instituto Um",
+        "department": "Departamento Um",
+        "professorName": "Professor Um"
+      }
+    ],
+    "from": "2016-01-01T03:00:00.000Z",
+    "to": "2018-01-01T03:00:00.000Z",
+    "status": "Em andamento"
+  },
+  {
+    "id": "1123a1ca-58f3-405f-afed-156e2f1f50ea",
+    "createdAt": "2021-10-10T20:27:18.677Z",
+    "updatedAt": "2021-10-10T21:06:25.532Z",
+    "deletedAt": null,
+    "userId": "73e66ed7-80b4-43df-9e51-84655802168c",
+    "type": "Promocao",
+    "comission": [
+      {
+        "institute": "Instituto Um",
+        "department": "Departamento Um",
+        "professorName": "Professor Um"
+      }
+    ],
+    "from": "2016-01-01T03:00:00.000Z",
+    "to": "2018-01-01T03:00:00.000Z",
+    "status": "Concluido"
+  }
+]
 ```

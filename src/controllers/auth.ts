@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { LoginError, ServerError } from "../helpers/apiError";
+import { LoginError } from "../helpers/apiError";
 import jwt from "jsonwebtoken";
 import { env } from "../helpers/env";
 import { StatusCodes } from "../helpers/statusCode";
@@ -9,22 +9,17 @@ export async function login(req: Request, res: Response) {
   const { email, password }: { email: string; password: string } = req.body;
 
   //validar input
-  try {
-    const dbUser = await req.db.UserRepository.findOneBy({ email });
+  const dbUser = await req.db.UserRepository.findOneBy({ email });
 
-    if (!dbUser) {
-      throw new LoginError("User or password does not exist.");
-    }
-
-    if (comparePassword(password, dbUser.password)) {
-      const token = jwt.sign({ id: dbUser.id }, env.JWT_SECRET, { expiresIn: "1hr" });
-
-      return res.status(StatusCodes.OKAY).send({ token: token, siape: dbUser.siape, firstName: dbUser.firstName, lastName: dbUser.lastName });
-    }
-
+  if (!dbUser) {
     throw new LoginError("User or password does not exist.");
-  } catch (error) {
-    console.log("Error on Login: ", error);
-    throw new ServerError((error as LoginError).message);
   }
+
+  if (comparePassword(password, dbUser.password)) {
+    const token = jwt.sign({ id: dbUser.id }, env.JWT_SECRET, { expiresIn: "1hr" });
+
+    return res.status(StatusCodes.OKAY).send({ token: token, siape: dbUser.siape, firstName: dbUser.firstName, lastName: dbUser.lastName });
+  }
+
+  throw new LoginError("User or password does not exist.");
 }

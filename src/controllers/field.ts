@@ -12,20 +12,15 @@ export async function createField(req: Request, res: Response) {
     throw new ValidationError(error.message);
   }
 
-  try {
-    const dbField = await req.db.FieldRepository.findOneBy({ campo: fieldInput.campo });
+  const dbField = await req.db.FieldRepository.findOneBy({ campo: fieldInput.campo });
 
-    if (dbField) {
-      throw new DuplicatedEntityError("There is already a field with this text");
-    }
-
-    const newField = await req.db.FieldRepository.insert(fieldInput);
-
-    return res.status(200).send(newField);
-  } catch (error) {
-    console.log("Error on Creating Fields: ", error);
-    throw new ServerError((error as KnexError).detail);
+  if (dbField) {
+    throw new DuplicatedEntityError("There is already a field with this text");
   }
+
+  const newField = await req.db.FieldRepository.insert(fieldInput);
+
+  return res.status(200).send(newField);
 }
 
 export async function getFields(req: Request, res: Response) {

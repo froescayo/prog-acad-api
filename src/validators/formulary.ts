@@ -22,5 +22,9 @@ export const formularyAnswersValidator = Joi.object({
   answers: Joi.array().items({
     semester: Joi.string().required(),
     quantity: Joi.number().required(),
+    file: Joi.object({
+      filename: Joi.string().required(),
+      content: Joi.string().required(),
+    }).allow(null),
   }),
 });

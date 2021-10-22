@@ -11,7 +11,7 @@ export class FormularyAnswerRepository extends Repository<DBFormularyAnswer> {
   }
 
   async upsertFormularyAnswers(req: Request, formularyAnswerInput: FormularyAnswerInput) {
-    const result = await req.knex.transaction(async trx => {
+      const result = await req.knex.transaction(async trx => {
       const dbFormularyAnswer = formularyAnswerInput.id ? await this.findOneBy({ id: formularyAnswerInput.id }, trx) : undefined;
 
       const dbActivity = await req.db.ActivityRepository.findOneBy({ id: formularyAnswerInput.activityId, fieldId: formularyAnswerInput.fieldId }, trx);

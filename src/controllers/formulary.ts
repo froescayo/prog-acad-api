@@ -57,7 +57,6 @@ export async function upsertFormularyAnswer(req: Request, res: Response) {
   const dbFormularyAnswers = await req.db.FormularyAnswerRepository.upsertFormularyAnswers(req, formularyAnswerInput);
 
   return res.status(200).send(dbFormularyAnswers);
-
 }
 
 export async function getFormulariesByUser(req: Request, res: Response) {

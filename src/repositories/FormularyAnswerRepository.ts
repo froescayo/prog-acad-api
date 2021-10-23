@@ -20,8 +20,32 @@ export class FormularyAnswerRepository extends Repository<DBFormularyAnswer> {
         throw new NotFoundError("We weren't able to find some field or activity.");
       }
 
+      const file = formularyAnswerInput.file;
+
       // if its an update
       if (dbFormularyAnswer) {
+        if (file) {
+          const dbFile = await req.db.FileRepository.findOneBy({ formularyAnswerId: dbFormularyAnswer.id });
+
+          if (!dbFile) {
+            await req.db.FileRepository.insert({
+              content: JSON.stringify(file.content),
+              filename: file.filename,
+              formularyAnswerId: dbFormularyAnswer.id,
+            },
+            trx
+            );
+          } else {
+            await req.db.FileRepository.update({
+              content: JSON.stringify(file.content),
+              filename: file.filename,
+              id: dbFile.id,
+            },
+            trx
+            );
+          }
+        }
+
         return this.update({
           id: dbFormularyAnswer.id,
           formularyId: formularyAnswerInput.formularyId,
@@ -43,6 +67,16 @@ export class FormularyAnswerRepository extends Repository<DBFormularyAnswer> {
         },
         trx,
       );
+
+      if (file) {
+        await req.db.FileRepository.insert({
+          filename: file.filename,
+          content: JSON.stringify(file.content),
+          formularyAnswerId: insertedFormularyAnswer.id,
+        },
+        trx
+        );
+      }
 
       return insertedFormularyAnswer;
     });

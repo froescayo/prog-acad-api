@@ -86,12 +86,17 @@ export async function getFormularyInformations(req: Request, res: Response) {
       "formularyAnswers.answer",
       "formularyAnswers.activityId",
       "formularyAnswers.fieldId",
+      "files.filename",
+      "files.content",
       "activities.atividade",
+      "activities.pontos",
+      "activities.peso",
       "fields.campo",
     )
     .leftJoin("activities", "formularyAnswers.activityId", "activities.id")
     .leftJoin("fields", "formularyAnswers.fieldId", "fields.id")
-    .groupBy("formularyAnswers.id", "fields.campo", "activities.atividade")
+    .leftJoin("files", "formularyAnswers.id", "files.formularyAnswerId")
+    .groupBy("formularyAnswers.id", "files.filename", "files.content", "fields.campo", "activities.atividade", "activities.pontos", "activities.peso")
     .where("formularyAnswers.formularyId", dbFormulary.id)
     .orderBy("fields.campo")
     .orderBy("activities.atividade");

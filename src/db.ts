@@ -77,3 +77,9 @@ export interface DBFormularyAnswer extends Base {
   activityId: string;
   answer: string;
 }
+
+export interface DBFile extends Base {
+  formularyAnswerId: string;
+  filename: string;
+  content: string;
+}

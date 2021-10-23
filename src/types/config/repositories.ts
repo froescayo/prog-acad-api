@@ -4,6 +4,7 @@ import {
   CareerRepository,
   CountryRepository,
   FieldRepository,
+  FileRepository,
   FormularyAnswerRepository,
   FormularyRepository,
   LevelRepository,
@@ -18,6 +19,7 @@ export interface Repositories {
   CareerRepository: CareerRepository;
   CountryRepository: CountryRepository;
   FieldRepository: FieldRepository;
+  FileRepository: FileRepository;
   FormularyAnswerRepository: FormularyAnswerRepository;
   FormularyRepository: FormularyRepository;
   LevelRepository: LevelRepository;

@@ -303,10 +303,14 @@ Request Body:
 ```js
 {
 	"id": null || "ID Referente a resposta a ser atualizada",
-	"formularyId": "1123a1ca-58f3-405f-afed-156e2f1f50ea",
-  "fieldId": "ed7dc5c6-5bc7-4702-a0e0-19fdc050c043",
-  "activityId": "aaeaec14-c422-4e12-beb6-2379d6cccc9a",
-  "answers": [
+	"formularyId": "0d1ba073-4445-4a84-8dd7-e3589fea4db9",
+	"fieldId": "ed7dc5c6-5bc7-4702-a0e0-19fdc050c043",
+	"activityId": "aaeaec14-c422-4e12-beb6-2379d6cccc9a",
+	"file": {
+		"filename": "teste.pdf", // pdf filename
+		"content": "JVBERi0xLjQKJcOkw7zDtsOfCjIgMCBvYmoKPDwvTGVuZ3RoIDMgMCBSL0ZpbHRlci9GbGF0ZURlY29kZT4+CnN0cmVhbQp4nG1PSWoDMRC8zyv6nINSpdE2YAIz8szdIMgHskAOhviS76e1YBMIQiDV0lUN+Zm+BQJD8Ys3syRHs8jtXV6f5No5PbfPaSuTDyZJdFEF5U2eD4qDlA85gbCY4eARXqR8TfTeePWp7ISIhAVrI5aaNPBN8RUZqTNOhw/mjNwwlzRqYPsd3ct0+a9ZiEFDRzOm3izjIEgkWr0zXRsR7yUSPQOjMokLV/1v..." // base64 pdf archive
+	},
+	"answers": [
 		{
 			"semester": "2018.1",
 			"quantity": 2
@@ -382,6 +386,8 @@ Response Body
       ],
       "activityId": "5e594f07-db03-440c-95c5-f9b437a27f56",
       "fieldId": "e4b36cb3-8fa8-4966-abfa-5bc4fc7ac534",
+      "filename": "teste.pdf", // pdf filename
+      "content": "JVBERi0xLjQKJcOkw7zDtsOfCjIgMCBvYmoKPDwvTGVuZ3RoIDMgMCBSL0ZpbHRlci9GbGF0ZURlY29kZT4+CnN0cmVhbQp4nG1PSWoDMRC8zyv6nINSpdE2YAIz8szdIMgHskAOhviS76e1YBMIQiDV0lUN+Zm+BQJD8Ys3syRHs8jtXV6f5No5PbfPaSuTDyZJdFEF5U2eD4qDlA85gbCY4eARXqR8TfTeePWp7ISIhAVrI5aaNPBN8RUZqTNOhw/mjNwwlzRqYPsd3ct0+a9ZiEFDRzOm3izjIEgkWr0zXRsR7yUSPQOjMokLV/1v..." // pdf archive base64
       "atividade": "2.7 Ministrante de cursos (CH <8 h) em eventos acadêmicos",
       "campo": "CAMPO II - ATIVIDADES DE PESQUISA, PRODUÇÃO ACADÊMICA, CRIAÇÃO E INOVAÇÃO"
     },
@@ -450,3 +456,9 @@ Response Body
   }
 ]
 ```
+
+
+---
+## Attention
+
+![Request Payload Limit](./docs/upsertFile.png)

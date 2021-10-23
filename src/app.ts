@@ -16,7 +16,7 @@ app.get("/", (_, res) => {
 
 app.use(cors());
 app.use(helmet());
-app.use(express.json({ limit: "50mb"}));
+app.use(express.json({ limit: "20mb" }));
 app.use(config(knex));
 app.use(routes);
 app.use(urlNotFoundHandler);

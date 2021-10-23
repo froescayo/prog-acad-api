@@ -309,7 +309,7 @@ Request Body:
 	"file": {
 		"filename": "teste.pdf", // pdf filename
 		"content": "JVBERi0xLjQKJcOkw7zDtsOfCjIgMCBvYmoKPDwvTGVuZ3RoIDMgMCBSL0ZpbHRlci9GbGF0ZURlY29kZT4+CnN0cmVhbQp4nG1PSWoDMRC8zyv6nINSpdE2YAIz8szdIMgHskAOhviS76e1YBMIQiDV0lUN+Zm+BQJD8Ys3syRHs8jtXV6f5No5PbfPaSuTDyZJdFEF5U2eD4qDlA85gbCY4eARXqR8TfTeePWp7ISIhAVrI5aaNPBN8RUZqTNOhw/mjNwwlzRqYPsd3ct0+a9ZiEFDRzOm3izjIEgkWr0zXRsR7yUSPQOjMokLV/1v..." // base64 pdf archive
-	},
+	} || null,
 	"answers": [
 		{
 			"semester": "2018.1",
@@ -461,4 +461,4 @@ Response Body
 ---
 ## Attention
 
-![Request Payload Limit](./docs/upsertFile.png)
+![Request Payload Limit || null](./docs/upsertFile.png)
